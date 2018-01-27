@@ -81,4 +81,4 @@ If you find a bug or a mistake in the source code, you can help us by submitting
 
 ### License
 
-MessageKit is released under the [MIT License](https://github.com/SwifterSwift/SwiftMeter/blob/master/LICENSE).
+SwiftMeter is released under the [MIT License](https://github.com/SwifterSwift/SwiftMeter/blob/master/LICENSE).

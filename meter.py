@@ -165,7 +165,7 @@ def directory_stats(directory_name):
     return stats_dict
 
 
-def badge_url(key, value, color='greeen'):
+def badge_url(key, value, color='green'):
     """Creates a custom shields.io badge for given key and value."""
 
     base_url = 'https://img.shields.io/badge/{0}-{1}-{2}.svg'

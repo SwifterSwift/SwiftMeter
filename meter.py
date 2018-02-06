@@ -183,6 +183,21 @@ def dict_badge_urls(stats_dict):
         badges_dict[key] = badge_url(key, value)
     return badges_dict
 
+def output_full_path(output_file_path):
+    if output_file_path is not None:
+        if path.isdir(output_file_path):
+            output_file_path = path.join(output_file_path, 'report.txt')
+        if path.isabs(output_file_path): 
+            return output_file_path
+        else: 
+            current_dir = path.dirname(__file__)
+            return path.join(current_dir, output_file_path)
+    return None
+
+def export_to_file(report, file_path):
+    with open(file_path, 'a') as f:
+        f.write(report)
+        f.close()
 
 parser = ArgumentParser()
 
@@ -198,33 +213,45 @@ parser.add_argument('-b', '--badges', action='store_true',
 parser.add_argument('-v', '--verbose', action='store_true',
                     help='Log verbose data')
 
+parser.add_argument('-o', '--output',
+                    help='The output file path where the results will be exported')
+
 args = parser.parse_args()
 
 file_name = args.file
 sources_dir = args.sources
 badges = args.badges
 is_logging = args.verbose
+out_file = args.output
 
+str_report = ""
 if file_name: # Show file stats
-    print('=' * 80)
-    print('Swift codebase statistics:')
-    stats_dict = file_stats(file_name)
-    print(json.dumps(stats_dict, indent=4))
+    str_report += '=' * 80 + '\n'
+    str_report += 'Swift codebase statistics:\n'
+    stats_dict = file_stats(file_name) + '\n'
+    str_report += json.dumps(stats_dict, indent=4) + '\n'
 
     if badges: # show badges
-        print('\n')
-        print('Shields.io badges:')
-        print(json.dumps(dict_badge_urls(STATS_DICT), indent=4))
-    print('=' * 80)
+        str_report += '\n'
+        str_report += 'Shields.io badges:\n' 
+        str_report += json.dumps(dict_badge_urls(STATS_DICT), indent=4) + '\n'
+    str_report += '=' * 80 + '\n'
 
 if sources_dir: # Show directory stats
-    print('=' * 80)
-    print('Swift codebase statistics:')
-    stats_dict = directory_stats(sources_dir)
-    print(json.dumps(stats_dict, indent=4))
+    str_report += '=' * 80 + '\n'
+    str_report += 'Swift codebase statistics:\n' 
+    stats_dict = directory_stats(sources_dir) 
+    str_report += json.dumps(stats_dict, indent=4) + '\n'
 
     if badges: # show badges
-        print('\n')
-        print('Shields.io badges:')
-        print(json.dumps(dict_badge_urls(stats_dict), indent=4))
-    print('=' * 80)
+        str_report += '\n'
+        str_report += 'Shields.io badges:\n'
+        str_report += json.dumps(dict_badge_urls(stats_dict), indent=4) + '\n'
+    str_report += '=' * 80 + '\n'
+
+print(str_report)
+
+output_path = output_full_path(out_file)
+
+if output_path is not None:
+    export_to_file(str_report, output_path)

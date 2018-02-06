@@ -33,6 +33,12 @@ Add the `-b` flag to the end to create [shields.io](https://shields.io/) badges.
 python meter.py -d path_to_sources_directory -b
 ```
 
+#### Output the results into a file
+
+```bash
+python meter.py -d path_to_sources_directory -o file_path_to_export
+```
+
 #### Verbose logging
 
 Add the `-v` flag to the end to create log verbose messages while processing swift files.

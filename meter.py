@@ -227,7 +227,7 @@ str_report = ""
 if file_name: # Show file stats
     str_report += '=' * 80 + '\n'
     str_report += 'Swift codebase statistics:\n'
-    stats_dict = file_stats(file_name) + '\n'
+    stats_dict = file_stats(file_name)
     str_report += json.dumps(stats_dict, indent=4) + '\n'
 
     if badges: # show badges

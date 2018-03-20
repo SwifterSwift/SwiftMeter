@@ -85,7 +85,6 @@ def file_stats(file_name):
             if not is_line_public(stripped): # inner line or private unit
                 if 'operator' in stripped:
                     operators += 1
-                continue
 
             if 'enum' in stripped: # enums
                 enums += 1

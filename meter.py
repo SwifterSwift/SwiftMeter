@@ -1,15 +1,17 @@
 #!/usr/bin/python
-
 from argparse import ArgumentParser
 from os import walk, path
 import json
 
+
 is_logging = False
+
 
 def log(message):
     """Print given message if is_logging is True"""
     if is_logging:
         print(message)
+
 
 def is_line_public(line):
     """Check if line has `public` or `open` keywords."""
@@ -182,6 +184,7 @@ def dict_badge_urls(stats_dict):
         badges_dict[key] = badge_url(key, value)
     return badges_dict
 
+
 def output_full_path(output_file_path):
     if output_file_path is not None:
         if path.isdir(output_file_path):
@@ -193,10 +196,10 @@ def output_full_path(output_file_path):
             return path.join(current_dir, output_file_path)
     return None
 
+
 def export_to_file(report, file_path):
     with open(file_path, 'a') as f:
         f.write(report)
-        f.close()
 
 
 if __name__ == '__main__':
